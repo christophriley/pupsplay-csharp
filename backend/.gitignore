@@ -7,3 +7,6 @@ obj/
 *.sln.docstates
 .env
 appsettings.Local.json
+*.db
+*.db-shm
+*.db-wal

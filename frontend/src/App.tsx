@@ -1,21 +1,15 @@
-import { useEffect, useState } from 'react'
+import { Navigate, Route, Routes } from 'react-router-dom'
+import HomePage from './pages/HomePage'
+import LoginPage from './pages/LoginPage'
+import RegisterPage from './pages/RegisterPage'
 
-function App() {
-  const [message, setMessage] = useState<string>('')
-
-  useEffect(() => {
-    fetch('/api/hello')
-      .then(res => res.json())
-      .then(data => setMessage(data.message))
-      .catch(() => setMessage('Could not reach the API'))
-  }, [])
-
+export default function App() {
   return (
-    <div style={{ fontFamily: 'sans-serif', textAlign: 'center', marginTop: '4rem' }}>
-      <h1>PupsPlay</h1>
-      <p>{message || 'Loading...'}</p>
-    </div>
+    <Routes>
+      <Route path="/" element={<HomePage />} />
+      <Route path="/login" element={<LoginPage />} />
+      <Route path="/register" element={<RegisterPage />} />
+      <Route path="*" element={<Navigate to="/" replace />} />
+    </Routes>
   )
 }
-
-export default App
