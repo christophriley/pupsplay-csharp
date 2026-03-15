@@ -1,0 +1,6 @@
+@PupsPlay.Api_HostAddress = http://localhost:5082
+
+GET {{PupsPlay.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
