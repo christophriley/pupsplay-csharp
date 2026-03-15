@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace PupsPlay.Api.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20260315194412_AddPetTable")]
+    [Migration("20260315201637_AddPetTable")]
     partial class AddPetTable
     {
         /// <inheritdoc />
@@ -35,7 +35,12 @@ namespace PupsPlay.Api.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<int>("OwnerId")
+                        .HasColumnType("INTEGER");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("OwnerId");
 
                     b.ToTable("Pets");
                 });
@@ -60,6 +65,17 @@ namespace PupsPlay.Api.Migrations
                         .IsUnique();
 
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("PupsPlay.Api.Models.Pet", b =>
+                {
+                    b.HasOne("PupsPlay.Api.Models.User", "Owner")
+                        .WithMany()
+                        .HasForeignKey("OwnerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Owner");
                 });
 #pragma warning restore 612, 618
         }
