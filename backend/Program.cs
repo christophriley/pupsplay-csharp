@@ -51,6 +51,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapAuthEndpoints();
+app.MapPetEndpoints();
 
 app.MapGet("/api/hello", () => new { message = "Hello world from PupsPlay!" });
 
